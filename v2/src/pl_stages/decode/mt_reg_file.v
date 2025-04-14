@@ -30,6 +30,6 @@ end
 
 //asynchronous read logic
 assign rd1 = (a1 == 5'd0) ? (32'd0) : (reg_array[tid_read*NUM_THREADS + a1]);
-assign rd1 = (a2 == 5'd0) ? (32'd0) : (reg_array[tid_read*NUM_THREADS + a2]);
+assign rd2 = (a2 == 5'd0) ? (32'd0) : (reg_array[tid_read*NUM_THREADS + a2]);
 
 endmodule
