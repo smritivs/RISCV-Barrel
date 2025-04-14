@@ -1,4 +1,4 @@
 *.vcd
 .ropeproject
-veridian.yml
+./veridian.yml
 ./obj_dir

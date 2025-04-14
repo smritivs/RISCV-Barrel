@@ -93,6 +93,12 @@ run:
 ######################################################################
 # Other targets
 
+gh:
+	git add . -A
+	git commit -m "$(msg)"
+	xclip -sel c < ~/git_stuff/key.txt
+	git push origin main
+
 show-config:
 	$(VERILATOR) -V
 
