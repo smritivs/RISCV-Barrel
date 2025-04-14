@@ -1,4 +1,4 @@
-module mt_pc();
+module mt_pc_tb();
 parameter NUM_THREADS = 8;
 parameter BITS_THREADS = $clog2(NUM_THREADS);
 parameter ADDRESS_WIDTH = 32;
@@ -16,10 +16,11 @@ mt_pc dut(
 .pc_src_e(pc_src_e),
 .branch_tid_e(branch_tid_e),
 .pc_target_e(pc_target_e),
+.pc(pc)
 );
 initial begin
 clk = 0;
-rst = 0;
+rst = 1;
 tid = 0;
 pc_src_e = 0;
 branch_tid_e = 0;
@@ -29,7 +30,35 @@ always
     #5 clk = ~clk;
 // Write testbench code here
 initial begin
+    #10
+    rst = 0;
+    tid = 0;
+    pc_src_e = 0;
+    branch_tid_e = 0;
+    pc_target_e = 0;
 
+    #10
+    rst = 0;
+    tid = 0;
+    pc_src_e = 0;
+    branch_tid_e = 0;
+    pc_target_e = 0;
+
+    #10
+    rst = 0;
+    tid = 0;
+    pc_src_e = 0;
+    branch_tid_e = 0;
+    pc_target_e = 0;
+
+    #10
+    rst = 0;
+    tid = 0;
+    pc_src_e = 0;
+    branch_tid_e = 0;
+    pc_target_e = 0;
+
+    #100 $finish();
 end
 initial begin
 $dumpfile("dumpfile.vcd");

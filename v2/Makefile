@@ -4,6 +4,8 @@
 # 	cat ~/git_stuff/RISCV-Vivado/$(TYPE)$(STAGES)stage/$(TYPE)$(STAGES)stage.srcs/sources_1/new/code.hex
 # 	python3 ./scripts/setup_vivado.py "$(TYPE)" "$(STAGES)"
 
+brach = main
+
 # Check for sanity to avoid later confusion
 
 ifneq ($(words $(CURDIR)),1)
@@ -26,7 +28,7 @@ VERILATOR_FLAGS += --binary -j 0
 # Optimize
 # VERILATOR_FLAGS += -x-assign fast
 # Warn abount lint issues; may not want this on less solid designs
-VERILATOR_FLAGS += -Wall
+# VERILATOR_FLAGS += -Wall
 # Make waveforms
 VERILATOR_FLAGS += --trace
 # Check SystemVerilog assertions
@@ -43,30 +45,37 @@ SRC_STG=  -y ./src/pl_stages/fetch -y ./src/pl_stages/decode -y ./src/pl_stages/
 SRC_REGS=  -y ./src/pl_regs
 SRC_UTILS=  -y ./src/utils
 SRC_TOP= -y ./src/top
-TEST_PATH = ./test/$(module)_tb.v
+TEST_PATH = ./test/$(path)/$(top)_tb.v
 VERILATOR_INPUT = $(TEST_PATH) $(SRC_STG) $(SRC_REGS) $(SRC_UTILS) $(SRC_TOP)
 
-######################################################################
 default: run
 
 run:
-	@echo
+	@echo "Compiling testbench"
+	@echo "Linting off"
 	$(VERILATOR) $(VERILATOR_FLAGS) $(VERILATOR_INPUT)
+	./obj_dir/V$(top)_tb +trace
+	gtkwave dumpfile.vcd
 
-	obj_dir/Vtop +trace
+db:
+	@echo "Compiling testbench"
+	@echo "All warnings on"
+	$(VERILATOR) $(VERILATOR_FLAGS) $(VERILATOR_INPUT)
+	./obj_dir/V$(top)_tb +trace
+	gtkwave dumpfile.vcd
 
-
-######################################################################
 # Other targets
+
 
 gh:
 	git add . -A
 	git commit -m "$(msg)"
 	xclip -sel c < ~/git_stuff/key.txt
-	git push origin main
+	git push origin $(branch)
 
 show-config:
 	$(VERILATOR) -V
 
 clean:
 	-rm -rf obj_dir logs *.log *.dmp *.vcd coverage.dat core
+	clear

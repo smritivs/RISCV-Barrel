@@ -83,7 +83,7 @@ module_name = re.sub(r".v","",module_name)
 
 with open(output_file,'w') as file:
 	new_lines = list()
-	new_lines.append(f"module {module_name}();\n")
+	new_lines.append(f"module {module_name}_tb();\n")
 
 	# write params
 
@@ -116,6 +116,9 @@ with open(output_file,'w') as file:
 		if i != ops[-1]:
 			new_lines.append(f".{i}({i}),\n")
 
+		else:
+			new_lines.append(f".{i}({i})\n")
+
 	new_lines.append(");\n")
 
 	new_lines.append("initial begin\n")
@@ -134,7 +137,7 @@ with open(output_file,'w') as file:
 
 	new_lines.append(f'initial begin\n$dumpfile("dumpfile.vcd");\n$dumpvars(0,{module_name}_tb);\nend\n')
 
-	new_lines.append("endmodule")
+	new_lines.append("endmodule\n")
 
 	file.writelines(new_lines)
 
