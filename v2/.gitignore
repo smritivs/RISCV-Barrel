@@ -1,9 +1,9 @@
 *.vcd
 .ropeproject
-./veridian.yml
-./obj_dir
-./scripts/const.py
-./scripts/__pycache__
-./scripts/*.hex
-./scripts/*.o
-./scripts/*.elf
+veridian.yml
+/obj_dir
+/scripts/const.py
+/scripts/__pycache__
+/scripts/*.hex
+/scripts/*.o
+/scripts/*.elf
