@@ -3,7 +3,7 @@
 ./veridian.yml
 ./obj_dir
 ./scripts/const.py
-./scripts/__*
+./scripts/__pycache__
 ./scripts/*.hex
 ./scripts/*.o
 ./scripts/*.elf
