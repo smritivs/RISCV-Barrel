@@ -66,7 +66,7 @@ db:
 
 # Other targets
 gh:
-	python ./scripts/git.py $(msg) $(branch)
+	python ./scripts/git.py "$(msg)" "$(branch)"
 
 hex:
 	python ./scripts/hex.py
