@@ -37,7 +37,7 @@ module fetch #(
 
 );
 
-    wire [31:0] pc, pc_plus4, pc_mux_res;
+    wire [31:0] pc;
     wire [BITS_THREADS-1:0] tid;
 
     thread_sel ts (
@@ -53,7 +53,8 @@ module fetch #(
         .pc_src_e(pc_src_e),
         .branch_tid_e(tid_e),
         .pc_target_e(pc_target_e),
-        .pc(pc)
+        .pc(pc),
+        .pc_plus4(pc_plus4_f)
     );
 
     instr_mem i_mem (
@@ -61,7 +62,6 @@ module fetch #(
         .instr(instr_f)
     );
 
-    assign pc_plus4_f = pc + 4;
     assign pc_f = pc;
     assign tid_f = tid;
 

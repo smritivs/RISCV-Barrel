@@ -30,6 +30,7 @@ module instr_mem #(
     output [DATA_WIDTH-1:0] instr
     );
 
+// wire for memory address access
 // array of 32-bit words or instructions
 reg [DATA_WIDTH-1:0] instr_rom [0:MEM_SIZE-1];
 initial begin
@@ -38,6 +39,7 @@ initial begin
 
 // word-aligned memory access
 // combinational read logic
+/* verilator lint_off WIDTHTRUNC */
 assign instr = instr_rom[instr_addr[31:2]];
 
 endmodule

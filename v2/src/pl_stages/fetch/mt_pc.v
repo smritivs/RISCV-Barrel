@@ -8,7 +8,8 @@ module mt_pc #(
     input pc_src_e,
     input [BITS_THREADS-1:0] branch_tid_e,
     input [ADDRESS_WIDTH-1:0] pc_target_e,
-    output reg [ADDRESS_WIDTH-1:0] pc
+    output reg [ADDRESS_WIDTH-1:0] pc,
+    output [ADDRESS_WIDTH-1:0] pc_plus4
     );
 
 reg [ADDRESS_WIDTH-1:0] t_pc [NUM_THREADS-1:0];
@@ -27,10 +28,12 @@ always @(posedge clk) begin
     else begin
         // get pc of current thread
         pc <= t_pc[tid];
-        // update tid of thread in ex stage
-        t_pc[branch_tid_e] <= (pc_src_e) ? (pc_target_e) : (t_pc[branch_tid_e] + 4);
+        t_pc[tid] <= pc_plus4;
+        // if branch/jump instruction, change pc accordingly
+        if(pc_src_e)
+            t_pc[branch_tid_e] <= pc_target_e;
     end
-
 end
 
+assign pc_plus4 = pc + 4;
 endmodule

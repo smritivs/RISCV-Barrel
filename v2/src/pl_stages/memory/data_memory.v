@@ -14,7 +14,7 @@ module data_memory #(
 // initialise data memory
 reg [DATA_WIDTH-1:0] ram [0:MEM_SIZE-1];
 // word aligned memory access
-wire [ADDRESS_WIDTH-1:0] word_addr = data_mem_addr[ADDRESS_WIDTH-1:2] % MEM_SIZE;
+wire [ADDRESS_WIDTH-1:0] word_addr = {2'd0,data_mem_addr[ADDRESS_WIDTH-1:2]} % MEM_SIZE;
 // read word
 wire [DATA_WIDTH-1:0] word = ram[word_addr];
 
@@ -57,6 +57,10 @@ always @(*) begin
         3'b010: begin
             read_data_m = word;
         end
+
+        default: begin
+            read_data_m = 32'd0;
+        end
     endcase
 end
 
@@ -82,6 +86,10 @@ always@(posedge clk) begin
             // sw
             3'b010: begin
                 ram[word_addr] <= write_data_e;
+            end
+
+            default: begin
+                ram[word_addr] <= 32'd0;
             end
         endcase
     end

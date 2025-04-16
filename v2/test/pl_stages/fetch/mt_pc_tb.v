@@ -8,7 +8,7 @@ reg [BITS_THREADS-1:0] tid;
 reg pc_src_e;
 reg [BITS_THREADS-1:0] branch_tid_e;
 reg [ADDRESS_WIDTH-1:0] pc_target_e;
-wire [ADDRESS_WIDTH-1:0] pc;
+wire [ADDRESS_WIDTH-1:0] pc,pc_plus4;
 mt_pc dut(
 .clk(clk),
 .rst(rst),
@@ -16,7 +16,8 @@ mt_pc dut(
 .pc_src_e(pc_src_e),
 .branch_tid_e(branch_tid_e),
 .pc_target_e(pc_target_e),
-.pc(pc)
+.pc(pc),
+.pc_plus4(pc_plus4)
 );
 initial begin
 clk = 0;
@@ -38,22 +39,21 @@ initial begin
     pc_target_e = 0;
 
     #10
-    rst = 0;
-    tid = 0;
+    tid = 1;
     pc_src_e = 0;
     branch_tid_e = 0;
     pc_target_e = 0;
 
     #10
     rst = 0;
-    tid = 0;
+    tid = 2;
     pc_src_e = 0;
     branch_tid_e = 0;
     pc_target_e = 0;
 
     #10
     rst = 0;
-    tid = 0;
+    tid = 3;
     pc_src_e = 0;
     branch_tid_e = 0;
     pc_target_e = 0;

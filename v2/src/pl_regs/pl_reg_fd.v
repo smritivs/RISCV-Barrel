@@ -19,7 +19,7 @@ always @(posedge clk) begin
 		pc_f_o <= 32'd0;
 		pc_plus4_f_o <= 32'd0;
 		instr_f_o <= 32'd0;
-		tid_f_o <= 32'd0;
+		tid_f_o <= 3'd0;
 	end
 
 	else if(!en) begin
