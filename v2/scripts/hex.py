@@ -2,7 +2,7 @@ import os
 import sys
 
 input_files = ""
-if(len(sys.argv) > 0):
+if(len(sys.argv) > 1):
 	input_files = sys.argv[1]
 
 else:
