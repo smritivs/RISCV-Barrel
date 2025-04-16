@@ -65,13 +65,11 @@ db:
 	gtkwave dumpfile.vcd
 
 # Other targets
-
-
 gh:
-	git add . -A
-	git commit -m "$(msg)"
-	xclip -sel c < ~/git_stuff/key.txt
-	git push origin $(branch)
+	python ./scripts/git.py $(msg) $(branch)
+
+hex:
+	python ./scripts/hex.py
 
 show-config:
 	$(VERILATOR) -V

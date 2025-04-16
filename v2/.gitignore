@@ -2,3 +2,8 @@
 .ropeproject
 ./veridian.yml
 ./obj_dir
+./scripts/const.py
+./scripts/__*
+./scripts/*.hex
+./scripts/*.o
+./scripts/*.elf
