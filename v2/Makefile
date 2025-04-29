@@ -26,7 +26,7 @@ VERILATOR_FLAGS += --binary -j 0
 # Generate makefile dependencies (not shown as complicates the Makefile)
 #VERILATOR_FLAGS += -MMD
 # Optimize
-# VERILATOR_FLAGS += -x-assign fast
+VERILATOR_FLAGS += -x-assign fast
 # Warn abount lint issues; may not want this on less solid designs
 # VERILATOR_FLAGS += -Wall
 # Make waveforms
@@ -45,21 +45,13 @@ SRC_STG=  -y ./src/pl_stages/fetch -y ./src/pl_stages/decode -y ./src/pl_stages/
 SRC_REGS=  -y ./src/pl_regs
 SRC_UTILS=  -y ./src/utils
 SRC_TOP= -y ./src/top
-TEST_PATH = ./test/$(path)/$(top)_tb.v
+TEST_PATH = ./test/$(dir)/$(top)_tb.v
 VERILATOR_INPUT = $(TEST_PATH) $(SRC_STG) $(SRC_REGS) $(SRC_UTILS) $(SRC_TOP)
 
 default: run
 
 run:
 	@echo "Compiling testbench"
-	@echo "Linting off"
-	$(VERILATOR) $(VERILATOR_FLAGS) $(VERILATOR_INPUT)
-	./obj_dir/V$(top)_tb +trace
-	gtkwave dumpfile.vcd
-
-db:
-	@echo "Compiling testbench"
-	@echo "All warnings on"
 	$(VERILATOR) $(VERILATOR_FLAGS) $(VERILATOR_INPUT)
 	./obj_dir/V$(top)_tb +trace
 	gtkwave dumpfile.vcd
@@ -70,6 +62,26 @@ gh:
 
 hex:
 	python ./scripts/hex.py
+
+help:
+	@echo "Run commands using make [command] [args]"
+	@echo "The command list is: "
+	@echo "help - print out this message"
+	@echo ""
+	@echo "run - compiles and simulates the design"
+	@echo "args"
+	@echo "top - path to top module"
+	@echo ""
+	@echo "gh - pushes all changes to remote github repo"
+	@echo "args"
+	@echo "msg - commit message"
+	@echo "branch - branch to push changes to"
+	@echo ""
+	@echo "hex - creates a hex file based on a test.c"
+	@echo ""
+	@echo "show-config - displays version"
+	@echo ""
+	@echo "clean - delete unecessary files"
 
 show-config:
 	$(VERILATOR) -V

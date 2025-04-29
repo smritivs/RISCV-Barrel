@@ -34,7 +34,7 @@ module execute #(
     input alu_src_b_d, alu_src_a_d, adder_src_d,
     input [DATA_WIDTH-1:0] rd1_d, rd2_d,
     input [ADDRESS_WIDTH-1:0] pc_d,
-    input [4:0] rs1_d, rs2_d, rd_d,
+    input [4:0] rd_d,
     input [DATA_WIDTH-1:0] imm_val_d,
     input [ADDRESS_WIDTH-1:0] pc_plus4_d,
     input [BITS_THREADS-1:0] tid_d,

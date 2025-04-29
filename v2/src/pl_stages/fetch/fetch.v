@@ -25,7 +25,7 @@ module fetch #(
     parameter NUM_THREADS = 8,
     parameter BITS_THREADS = $clog2(NUM_THREADS)
 ) (
-    input clk, rst, en,
+    input clk, rst,
 
     input pc_src_e,
     input [ADDRESS_WIDTH-1:0] pc_target_e,
@@ -46,7 +46,7 @@ module fetch #(
         .tid(tid)
     );
 
-    mt_pc t_pc(
+    mt_pc thread_pc(
         .clk(clk),
         .rst(rst),
         .tid(tid),

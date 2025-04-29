@@ -3,8 +3,9 @@ module mt_cpu_tb ();
     parameter DATA_WIDTH = 32;
 
     reg rst, clk;
-
+    /* verilator lint_off UNUSEDSIGNAL */
     wire [DATA_WIDTH-1:0] result;
+    /* verilator lint_off UNUSEDSIGNAL */
     wire [ADDRESS_WIDTH-1:0] pcw;
 
     mt_cpu dut (

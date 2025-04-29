@@ -51,7 +51,7 @@ always@(posedge clk) begin
 	else if(!en) begin
 	reg_write_d_o <= reg_write_d_i;
     res_src_d_o <= res_src_d_i;
-    mem_write_d_o <= mem_write_d_i; jump_d_o <= jump_d_i; branch_d_o <= jump_d_i;
+    mem_write_d_o <= mem_write_d_i; jump_d_o <= jump_d_i; branch_d_o <= branch_d_i;
     alu_control_d_o <= alu_control_d_i;
     funct3_d_o <= funct3_d_i;
     alu_src_b_d_o <= alu_src_b_d_i; alu_src_a_d_o <= alu_src_a_d_i; adder_src_d_o <= adder_src_d_i;
