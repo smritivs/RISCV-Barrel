@@ -13,7 +13,7 @@ module pl_reg_de #(
 	input alu_src_b_d_i, alu_src_a_d_i, adder_src_d_i,
 	input [DATA_WIDTH-1:0] rd1_d_i, rd2_d_i,
 	input [ADDRESS_WIDTH-1:0] pc_d_i,
-	input [4:0] rs1_d_i, rs2_d_i, rd_d_i,
+	input [4:0] rd_d_i,
 	input [DATA_WIDTH-1:0] imm_val_d_i,
 	input [ADDRESS_WIDTH-1:0] pc_plus4_d_i,
 	input [BITS_THREADS-1:0] tid_d_i,
@@ -26,7 +26,7 @@ module pl_reg_de #(
     output reg alu_src_b_d_o, alu_src_a_d_o, adder_src_d_o,
     output reg [DATA_WIDTH-1:0] rd1_d_o, rd2_d_o,
     output reg [ADDRESS_WIDTH-1:0] pc_d_o,
-    output reg [4:0] rs1_d_o, rs2_d_o, rd_d_o,
+    output reg [4:0] rd_d_o,
     output reg [DATA_WIDTH-1:0] imm_val_d_o,
     output reg [ADDRESS_WIDTH-1:0] pc_plus4_d_o,
     output reg [BITS_THREADS-1:0] tid_d_o
@@ -42,7 +42,7 @@ always@(posedge clk) begin
     alu_src_b_d_o <= 0; alu_src_a_d_o <= 0; adder_src_d_o <= 0;
     rd1_d_o <= 0; rd2_d_o <= 0;
     pc_d_o <= 0;
-    rs1_d_o <= 0; rs2_d_o <= 0; rd_d_o <= 0;
+    rd_d_o <= 0;
     imm_val_d_o <= 0;
     pc_plus4_d_o <= 0;
     tid_d_o <= 0;
@@ -57,7 +57,7 @@ always@(posedge clk) begin
     alu_src_b_d_o <= alu_src_b_d_i; alu_src_a_d_o <= alu_src_a_d_i; adder_src_d_o <= adder_src_d_i;
     rd1_d_o <= rd1_d_i; rd2_d_o <= rd2_d_i;
     pc_d_o <= pc_d_i;
-    rs1_d_o <= rs1_d_i; rs2_d_o <= rs2_d_i; rd_d_o <= rd_d_i;
+    rd_d_o <= rd_d_i;
     imm_val_d_o <= imm_val_d_i;
     pc_plus4_d_o <= pc_plus4_d_i;
     tid_d_o <= tid_d_i;

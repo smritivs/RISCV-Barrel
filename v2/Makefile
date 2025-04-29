@@ -28,7 +28,7 @@ VERILATOR_FLAGS += --binary -j 0
 # Optimize
 VERILATOR_FLAGS += -x-assign fast
 # Warn abount lint issues; may not want this on less solid designs
-# VERILATOR_FLAGS += -Wall
+VERILATOR_FLAGS += -Wall
 # Make waveforms
 VERILATOR_FLAGS += --trace
 # Check SystemVerilog assertions

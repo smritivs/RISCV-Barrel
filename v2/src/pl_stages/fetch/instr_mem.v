@@ -25,6 +25,7 @@ module instr_mem #(
     parameter DATA_WIDTH = 32,
     parameter MEM_SIZE = 512
     )(
+    /* verilator lint_off UNUSEDSIGNAL */
     input [ADDRESS_WIDTH-1:0] instr_addr,
     output [DATA_WIDTH-1:0] instr
     );

@@ -50,9 +50,7 @@ module decode #(
     output [DATA_WIDTH-1:0] rd1_d,
     rd2_d,
     output [ADDRESS_WIDTH-1:0] pc_d,
-    output [4:0] rs1_d,
-    rs2_d,
-    rd_d,
+    output [4:0] rd_d,
     output [DATA_WIDTH-1:0] imm_val_d,
     output [ADDRESS_WIDTH-1:0] pc_plus4_d,
     output [BITS_THREADS-1:0] tid_d
@@ -99,9 +97,6 @@ module decode #(
 
     assign pc_d = pc_f;
     assign pc_plus4_d = pc_plus4_f;
-
-    assign rs1_d = instr_f[19:15];
-    assign rs2_d = instr_f[24:20];
     assign rd_d = instr_f[11:7];
 
     assign tid_d = tid_f;

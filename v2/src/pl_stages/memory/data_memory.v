@@ -14,6 +14,7 @@ module data_memory #(
 // initialise data memory
 reg [DATA_WIDTH-1:0] ram [0:MEM_SIZE-1];
 // word aligned memory access
+/* verilator lint_off UNUSEDSIGNAL */
 wire [ADDRESS_WIDTH-1:0] word_addr = {2'd0,data_mem_addr[ADDRESS_WIDTH-1:2]} % MEM_SIZE;
 // read word
 wire [DATA_WIDTH-1:0] word = ram[word_addr];
