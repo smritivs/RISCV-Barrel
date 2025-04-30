@@ -5,28 +5,28 @@ module pl_reg_fd #(
 	)(
 	input clk, en, clr,
 
-	input [ADDRESS_WIDTH-1:0] pc_f_i, pc_plus4_f_i,
-    input [DATA_WIDTH-1:0] instr_f_i,
-    input [BITS_THREADS-1:0] tid_f_i,
+	input [ADDRESS_WIDTH-1:0] pc_f, pc_plus4_f,
+    input [DATA_WIDTH-1:0] instr_f,
+    input [BITS_THREADS-1:0] tid_f,
 
-    output reg [ADDRESS_WIDTH-1:0] pc_f_o, pc_plus4_f_o,
-    output reg [DATA_WIDTH-1:0] instr_f_o,
-    output reg [BITS_THREADS-1:0] tid_f_o
+    output reg [ADDRESS_WIDTH-1:0] pc_d, pc_plus4_d,
+    output reg [DATA_WIDTH-1:0] instr_d,
+    output reg [BITS_THREADS-1:0] tid_d
 );
 
 always @(posedge clk) begin
 	if(clr) begin
-		pc_f_o <= 32'd0;
-		pc_plus4_f_o <= 32'd0;
-		instr_f_o <= 32'd0;
-		tid_f_o <= 3'd0;
+		pc_d <= 32'd0;
+		pc_plus4_d <= 32'd0;
+		instr_d <= 32'd0;
+		tid_d <= 3'd0;
 	end
 
 	else if(!en) begin
-		pc_f_o <= pc_f_i;
-		pc_plus4_f_o <= pc_plus4_f_i;
-		instr_f_o <= instr_f_i;
-		tid_f_o <= tid_f_i;
+		pc_d <= pc_f;
+		pc_plus4_d <= pc_plus4_f;
+		instr_d <= instr_f;
+		tid_d <= tid_f;
 	end
 
 end
