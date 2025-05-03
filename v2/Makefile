@@ -41,12 +41,12 @@ VERILATOR_FLAGS += --trace
 #VERILATOR_FLAGS += --gdbbt
 
 # Input files for Verilator
-SRC_STG=  -y ./src/pl_stages/fetch -y ./src/pl_stages/decode -y ./src/pl_stages/execute -y ./src/pl_stages/memory -y ./src/pl_stages/writeback -y ./src/pl_stages/hazard
-SRC_REGS=  -y ./src/pl_regs
-SRC_UTILS=  -y ./src/utils
-SRC_TOP= -y ./src/top
-TEST_PATH = ./test/$(dir)/$(top)_tb.v
-VERILATOR_INPUT = $(TEST_PATH) $(SRC_STG) $(SRC_REGS) $(SRC_UTILS) $(SRC_TOP)
+# SRC_STG=  -y ./src/pl_stages/fetch -y ./src/pl_stages/decode -y ./src/pl_stages/execute -y ./src/pl_stages/memory -y ./src/pl_stages/writeback -y ./src/pl_stages/hazard
+# SRC_REGS=  -y ./src/pl_regs
+# SRC_UTILS=  -y ./src/utils
+SRC_FILES= -y ./src
+TEST_PATH = ./test/$(top)_tb.v
+VERILATOR_INPUT = $(TEST_PATH) $(SRC_FILES)
 
 default: run
 
@@ -57,6 +57,9 @@ run:
 	gtkwave dumpfile.vcd
 
 # Other targets
+syn:
+	oss
+	yosys
 gh:
 	python ./scripts/git.py "$(msg)" "$(branch)"
 

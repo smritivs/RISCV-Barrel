@@ -1,0 +1,45 @@
+module mt_cpu_tb ();
+    parameter ADDRESS_WIDTH = 32;
+    parameter DATA_WIDTH = 32;
+    parameter NUM_THREADS = 8;
+    parameter DMEM_SIZE = 64;
+    parameter IMEM_SIZE = 1024;
+
+    reg rst, clk;
+    /* verilator lint_off UNUSEDSIGNAL */
+    wire [DATA_WIDTH-1:0] result;
+    /* verilator lint_off UNUSEDSIGNAL */
+    wire [ADDRESS_WIDTH-1:0] pcw;
+
+    mt_cpu #(
+        .DATA_WIDTH(DATA_WIDTH),
+        .ADDRESS_WIDTH(ADDRESS_WIDTH),
+        .NUM_THREADS(NUM_THREADS),
+        .IMEM_SIZE(IMEM_SIZE),
+        .DMEM_SIZE(DMEM_SIZE)
+    )
+    dut (
+        .clk(clk),
+        .rst(rst),
+
+        .result(result),
+        .pcw(pcw)
+    );
+
+    initial begin
+        clk = 0;
+    end
+
+    always #5 clk = ~clk;
+
+    initial begin
+        $dumpfile("dumpfile.vcd");
+        $dumpvars(0, mt_cpu_tb);
+
+        rst = 1;
+        #10 rst = 0;
+
+        #5000 $finish();
+
+    end
+endmodule
