@@ -3,7 +3,6 @@ module alu #(
     )(
     input [DATA_WIDTH-1:0] a,b,
     input [3:0] alu_controls,
-    input funct3b0,
     output reg [DATA_WIDTH-1:0] res
 );
 
@@ -19,9 +18,6 @@ always @(*) begin
         4'b0111: res = $signed(a) >>> (b[4:0]);
         4'b1000: res = a | b;
         4'b1001: res = a & b;
-        4'b1010: res = ((a == b) ^ funct3b0) ? 32'd1 : 32'd0;
-        4'b1011: res = ((a < b) ^ funct3b0) ? 32'd1 : 32'd0;
-        4'b1100: res = (($signed(a) < $signed(b)) ^ funct3b0) ? 32'd1 : 32'd0;
         4'b1101: res = b;
         default: res = 32'd0;
     endcase

@@ -17,6 +17,11 @@ reg [ADDRESS_WIDTH-1:0] t_pc [NUM_THREADS-1:0];
 
 integer i;
 
+always @(*) begin
+    // combinational read, avoid glitch
+    pc = t_pc[tid];
+end
+
 always @(posedge clk) begin
     if(rst) begin
         // clear all PC vals to 0
@@ -27,8 +32,7 @@ always @(posedge clk) begin
     end
 
     else begin
-        // get pc of current thread
-        pc <= t_pc[tid];
+        // sequential update of pc
         t_pc[tid] <= pc_plus4;
         // if branch/jump instruction, change pc accordingly
         if(pc_src_e)

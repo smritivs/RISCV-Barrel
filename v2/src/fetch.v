@@ -1,24 +1,3 @@
-
-//////////////////////////////////////////////////////////////////////////////////
-// Company:
-// Engineer:
-//
-// Create Date: 12/27/2024 11:59:53 AM
-// Design Name:
-// Module Name: fetch
-// Project Name:
-// Target Devices:
-// Tool Versions:
-// Description:
-//
-// Dependencies:
-//
-// Revision:
-// Revision 0.01 - File Created
-// Additional Comments:
-//
-//////////////////////////////////////////////////////////////////////////////////
-
 module fetch #(
     parameter DATA_WIDTH = 32,
     parameter ADDRESS_WIDTH = 32,

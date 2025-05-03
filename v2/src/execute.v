@@ -30,7 +30,7 @@ module execute #(
     input mem_write_d, jump_d, branch_d,
     input [3:0] alu_control_d,
     input [14:12] funct3_d,
-    input alu_src_b_d, alu_src_a_d, adder_src_d,
+    input alu_src_b_d, alu_src_a_d,
     input [DATA_WIDTH-1:0] rd1_d, rd2_d,
     input [ADDRESS_WIDTH-1:0] pc_d,
     input [4:0] rd_d,
@@ -56,7 +56,7 @@ module execute #(
 localparam BITS_THREADS = $clog2(NUM_THREADS);
 
 wire [DATA_WIDTH-1:0] a_alu, b_alu;
-wire [ADDRESS_WIDTH-1:0] pc_adder_a;
+wire branch_result;
 
 alu #(
     .DATA_WIDTH(DATA_WIDTH)
@@ -65,19 +65,26 @@ alu #(
     .a(a_alu),
     .b(b_alu),
     .alu_controls(alu_control_d),
-    .funct3b0(funct3_d[12]),
     .res(alu_result_e)
+);
+
+branch_unit #(
+    .DATA_WIDTH(DATA_WIDTH)
+    )
+    bu (
+    .a(rd1_d),
+    .b(rd2_d),
+    .funct3(funct3_d),
+    .branch_result(branch_result)
 );
 
 assign a_alu = alu_src_a_d ? pc_d : rd1_d;
 assign b_alu = alu_src_b_d ? imm_val_d : rd2_d;
 
-assign pc_adder_a = adder_src_d ? rd1_d : pc_d;
-
 // banch target address
-assign pc_target_e = pc_adder_a + imm_val_d;
+assign pc_target_e = alu_result_e;
 // branch outcome
-assign pc_src_e = jump_d | (branch_d & alu_result_e[0]);
+assign pc_src_e = jump_d | (branch_d & branch_result);
 
 assign write_data_e = rd2_d;
 assign reg_write_e = reg_write_d;

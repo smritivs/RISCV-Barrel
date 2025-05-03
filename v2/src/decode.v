@@ -22,7 +22,6 @@ module decode #(
     output [2:0] funct3_d,
     output alu_src_b_d,
     alu_src_a_d,
-    adder_src_d,
 
     output [DATA_WIDTH-1:0] rd1_d,
     rd2_d,
@@ -49,7 +48,6 @@ localparam BITS_THREADS = $clog2(NUM_THREADS);
         .alu_control_d(alu_control_d),
         .alu_src_a_d(alu_src_a_d),
         .alu_src_b_d(alu_src_b_d),
-        .adder_src_d(adder_src_d),
         .imm_src_d(imm_src_d)
     );
 

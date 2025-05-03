@@ -28,7 +28,7 @@ module mt_cpu #(
     wire [4:0] rd_d_o;
     wire [3:0] alu_control_d_o;
     wire [1:0] res_src_d_o;
-    wire mem_write_d_o, reg_write_d_o, jump_d_o, branch_d_o, alu_src_a_d_o, alu_src_b_d_o, adder_src_d_o;
+    wire mem_write_d_o, reg_write_d_o, jump_d_o, branch_d_o, alu_src_a_d_o, alu_src_b_d_o;
     wire [2:0] funct3_d_o;
     wire [BITS_THREADS-1:0] tid_d_o;
 
@@ -37,7 +37,7 @@ module mt_cpu #(
     wire [4:0] rd_e_i;
     wire [3:0] alu_control_e_i;
     wire [1:0] res_src_e_i;
-    wire mem_write_e_i, reg_write_e_i, jump_e_i, branch_e_i, alu_src_a_e_i, alu_src_b_e_i, adder_src_e_i;
+    wire mem_write_e_i, reg_write_e_i, jump_e_i, branch_e_i, alu_src_a_e_i, alu_src_b_e_i;
     wire [2:0] funct3_e_i;
     wire [BITS_THREADS-1:0] tid_e_i;
 
@@ -159,7 +159,6 @@ module mt_cpu #(
         .branch_d(branch_d_o),
         .alu_src_a_d(alu_src_a_d_o),
         .alu_src_b_d(alu_src_b_d_o),
-        .adder_src_d(adder_src_d_o),
         .tid_d(tid_d_o)
     );
 
@@ -178,7 +177,6 @@ module mt_cpu #(
         .funct3_d(funct3_d_o),
         .alu_src_b_d(alu_src_b_d_o),
         .alu_src_a_d(alu_src_a_d_o),
-        .adder_src_d(adder_src_d_o),
         .rd1_d(rd1_d_o),
         .rd2_d(rd2_d_o),
         .pc_d(pc_d_o),
@@ -196,7 +194,6 @@ module mt_cpu #(
         .funct3_e(funct3_e_i),
         .alu_src_b_e(alu_src_b_e_i),
         .alu_src_a_e(alu_src_a_e_i),
-        .adder_src_e(adder_src_e_i),
         .rd1_e(rd1_e_i),
         .rd2_e(rd2_e_i),
         .pc_e(pc_e_i),
@@ -221,7 +218,6 @@ module mt_cpu #(
         .funct3_d(funct3_e_i),
         .alu_src_b_d(alu_src_b_e_i),
         .alu_src_a_d(alu_src_a_e_i),
-        .adder_src_d(adder_src_e_i),
         .rd1_d(rd1_e_i),
         .rd2_d(rd2_e_i),
         .pc_d(pc_e_i),
@@ -343,6 +339,6 @@ module mt_cpu #(
 
     assign result = alu_result_w_i;
 
-    assign pcw = pc_plus4_m_o - 4;
+    assign pcw = pc_plus4_w_i - 4;
 
 endmodule

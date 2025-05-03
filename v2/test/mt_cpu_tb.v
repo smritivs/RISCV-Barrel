@@ -39,7 +39,7 @@ module mt_cpu_tb ();
         rst = 1;
         #10 rst = 0;
 
-        #5000 $finish();
+        #10000 $finish();
 
     end
 endmodule
