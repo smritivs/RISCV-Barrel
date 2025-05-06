@@ -3,7 +3,7 @@
 # 	cat ./src/pl_stages/fetch/code.hex > ~/git_stuff/RISCV-Vivado/$(TYPE)$(STAGES)stage/$(TYPE)$(STAGES)stage.srcs/sources_1/new/code.hex
 # 	cat ~/git_stuff/RISCV-Vivado/$(TYPE)$(STAGES)stage/$(TYPE)$(STAGES)stage.srcs/sources_1/new/code.hex
 # 	python3 ./scripts/setup_vivado.py "$(TYPE)" "$(STAGES)"
-
+SHELL := /bin/bash
 brach = main
 
 # Check for sanity to avoid later confusion
@@ -58,8 +58,8 @@ run:
 
 # Other targets
 syn:
-	oss
-	yosys
+	python ./scripts/synth.py "$(top)"
+
 gh:
 	python ./scripts/git.py "$(msg)" "$(branch)"
 

@@ -1,5 +1,0 @@
-read_verilog_file_list file_list
-synth -top mt_cpu
-dfflibmap -liberty ~/skywater-pdk/libraries/sky130_fd_sc_hd/latest/timing/sky130_fd_sc_hd__tt_025C_1v80.lib
-abc -liberty ~/skywater-pdk/libraries/sky130_fd_sc_hd/latest/timing/sky130_fd_sc_hd__tt_025C_1v80.lib
-clean
