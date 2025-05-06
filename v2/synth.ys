@@ -1,1 +1,0 @@
-read_liberty -lib ~/skywater-pdk/libraries/sky130_fd_sc_hd/latest/timing/sky130_fd_sc_hd__tt_025C_1v80.libread_verilog_file_list -f ./scripts/file_list.txtsynth -top mt_cpuflattenabc -liberty ~/skywater-pdk/libraries/sky130_fd_sc_hd/latest/timing/sky130_fd_sc_hd__tt_025C_1v80.lib
