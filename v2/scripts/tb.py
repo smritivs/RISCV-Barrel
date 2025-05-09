@@ -31,7 +31,7 @@ with open(input_file,'r') as file:
 				ports = current_line.split(",")
 
 				for j in ports:
-					inputs[j] = input_len
+					inputs[j.strip()] = input_len
 
 			# scalar input
 			else:
@@ -39,7 +39,7 @@ with open(input_file,'r') as file:
 				ports = current_line.split(",")
 
 				for j in ports:
-					inputs[j] = ""
+					inputs[j.strip()] = ""
 
 
 		# outputs
@@ -60,7 +60,7 @@ with open(input_file,'r') as file:
 				ports = current_line.split(",")
 
 				for j in ports:
-					outputs[j] = output_len
+					outputs[j.strip()] = output_len
 
 			# scalar input
 			else:
@@ -68,7 +68,7 @@ with open(input_file,'r') as file:
 				ports = current_line.split(",")
 
 				for j in ports:
-					outputs[j] = ""
+					outputs[j.strip()] = ""
 
 		elif 'parameter' in current_line:
 			current_line = re.sub(r"parameter ","",current_line).strip()
@@ -76,10 +76,10 @@ with open(input_file,'r') as file:
 			params.append(current_line)
 
 
-output_file = sys.argv[2]
-
 module_name = input_file.split("/")[-1].strip()
 module_name = re.sub(r".v","",module_name)
+
+output_file = "./test/" + module_name + "_tb.v"
 
 with open(output_file,'w') as file:
 	new_lines = list()
