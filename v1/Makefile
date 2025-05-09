@@ -29,12 +29,22 @@ else
 
 endif
 
-lint:
-ifeq ($(top),cpu)
-	verilator --lint-only ./test/top/cpu_tb.v  $(SRC_ALL_V)
+ifeq ($(VERILATOR_ROOT),)
+VERILATOR = verilator
 else
-	verilator --lint-only --top-module ./test/pl_stages/$(stage)/$(stage)_tb.v ./src/pl_stages/$(stage)/*.v ./src/utils/*.v
+export VERILATOR_ROOT
+VERILATOR = $(VERILATOR_ROOT)/bin/verilator
 endif
+
+veril:
+	@echo "-- Verilator hello-world simple binary example"
+	@echo "-- VERILATE & BUILD --------"
+	$(VERILATOR) --binary --trace -j 0 ./test/pl_stages/decode/decode_tb.v -y ./src/pl_stages
+	@echo "-- RUN ---------------------"
+	obj_dir/Vdecode_tb
+	@echo "-- DONE --------------------"
+	@echo "Note: Once this example is understood, see examples/make_hello_c."
+	@echo "Note: See also https://verilator.org/guide/latest/examples.html"
 
 gh:
 	git add . -A
