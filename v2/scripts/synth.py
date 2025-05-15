@@ -19,7 +19,12 @@ if __name__ == "__main__":
 		lines.append("read_verilog_file_list -f ./scripts/file_list.txt\n")
 		lines.append(f"synth -top {top_module}\n")
 		lines.append("flatten\n")
+		lines.append(f"dfflibmap -liberty {sky_path}\n")
 		lines.append(f"abc -liberty {sky_path}\n")
+		lines.append("clean\n")
+		lines.append("write_verilog -noattr -noexpr -nohex -nodec ./scripts/syn.v\n")
+		lines.append(f"stat -liberty {sky_path} -tech cmos\n")
+
 		file.writelines(lines)
 
 	os.system("/bin/bash -c \"source ~/oss-cad-suite/environment && yosys ./scripts/synth.ys\"")

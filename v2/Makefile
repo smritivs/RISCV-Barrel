@@ -57,6 +57,9 @@ run:
 	gtkwave dumpfile.vcd
 
 # Other targets
+power:
+	python ./scripts/power.py $(top)
+
 syn:
 	python ./scripts/synth.py "$(top)"
 

@@ -18,4 +18,3 @@ if __name__ == "__main__":
 	os.system("riscv64-unknown-elf-elf2hex --bit-width 32 --input temp.elf --output op.hex")
 	os.system("rm *.elf")
 	os.system("mv ./op.hex ./src/code.mem")
-	# os.system("clear")
