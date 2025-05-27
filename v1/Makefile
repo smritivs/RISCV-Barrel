@@ -1,63 +1,97 @@
-# SOURCES=./src/pl_stages/fetch/fetch.v ./src/pl_stages/decode/decode.v ./src/pl_stages/execute/execute.v ./src/pl_stages/memory/memory.v ./src/pl_stages/writeback/writeback.v ./src/utils ./src/pl_regs/
-SRC_STG=-Y .v -y ./src/pl_stages/fetch -Y .v -y ./src/pl_stages/decode -Y .v -y ./src/pl_stages/execute -Y .v -y ./src/pl_stages/memory -Y .v -y ./src/pl_stages/writeback -Y .v -y ./src/pl_stages/hazard
-SRC_REGS=-Y .v -y ./src/pl_regs
-SRC_UTILS=-Y .v -y ./src/utils
-SRC_TOP=-Y .v -y ./src/top
+# Create TCL based setup for the same
+# svi:
+# 	cat ./src/pl_stages/fetch/code.hex > ~/git_stuff/RISCV-Vivado/$(TYPE)$(STAGES)stage/$(TYPE)$(STAGES)stage.srcs/sources_1/new/code.hex
+# 	cat ~/git_stuff/RISCV-Vivado/$(TYPE)$(STAGES)stage/$(TYPE)$(STAGES)stage.srcs/sources_1/new/code.hex
+# 	python3 ./scripts/setup_vivado.py "$(TYPE)" "$(STAGES)"
+SHELL := /bin/bash
+brach = main
 
-SRC_STG_V=-y ./src/pl_stages/hazard/ -y ./src/pl_stages/fetch -y ./src/pl_stages/decode -y ./src/pl_stages/execute -y ./src/pl_stages/memory -y ./src/pl_stages/writeback
-SRC_REGS_V=--y ./src/pl_regs
-SRC_UTILS_V=-y ./src/utils
-SRC_TOP_V=-y ./src/top
+# Check for sanity to avoid later confusion
 
-SRC_ALL=$(SRC_STG) $(SRC_REGS) $(SRC_UTILS) $(SRC_TOP)
-
-SRC_ALL_V=$(SRC_STG_V) $(SRC_REGS_V) $(SRC_UTILS_V) $(SRC_TOP_V)
-
-# Project specific variables
-STAGES=5
-TYPE=base
-sim:
-ifeq ($(top),cpu)
-	iverilog -Wall $(SRC_ALL) ./test/top/cpu_tb.v
-	./a.out
-	gtkwave dumpfile.vcd
-
-else
-	iverilog $(SRC_ALL) ./test/pl_stages/$(target)/$(target)_tb.v
-	./a.out
-	gtkwave dumpfile.vcd
-
+ifneq ($(words $(CURDIR)),1)
+ $(error Unsupported: GNU Make cannot build in directories containing spaces, build elsewhere: '$(CURDIR)')
 endif
 
 ifeq ($(VERILATOR_ROOT),)
 VERILATOR = verilator
+VERILATOR_COVERAGE = verilator_coverage
 else
 export VERILATOR_ROOT
 VERILATOR = $(VERILATOR_ROOT)/bin/verilator
+VERILATOR_COVERAGE = $(VERILATOR_ROOT)/bin/verilator_coverage
 endif
 
-veril:
-	@echo "-- Verilator hello-world simple binary example"
-	@echo "-- VERILATE & BUILD --------"
-	$(VERILATOR) --binary --trace -j 0 ./test/pl_stages/decode/decode_tb.v -y ./src/pl_stages
-	@echo "-- RUN ---------------------"
-	obj_dir/Vdecode_tb
-	@echo "-- DONE --------------------"
-	@echo "Note: Once this example is understood, see examples/make_hello_c."
-	@echo "Note: See also https://verilator.org/guide/latest/examples.html"
+# Generate C++ in executable form
+VERILATOR_FLAGS += --binary -j 0
+# Generate makefile dependencies (not shown as complicates the Makefile)
+#VERILATOR_FLAGS += -MMD
+# Optimize
+VERILATOR_FLAGS += -x-assign fast
+# Warn abount lint issues; may not want this on less solid designs
+VERILATOR_FLAGS += -Wall
+# Make waveforms
+VERILATOR_FLAGS += --trace
+# Check SystemVerilog assertions
+# VERILATOR_FLAGS += --assert
+# Generate coverage analysis
+# VERILATOR_FLAGS += --coverage
+# Run Verilator in debug mode
+#VERILATOR_FLAGS += --debug
+# Add this trace to get a backtrace in gdb
+#VERILATOR_FLAGS += --gdbbt
+
+# Input files for Verilator
+# SRC_STG=  -y ./src/pl_stages/fetch -y ./src/pl_stages/decode -y ./src/pl_stages/execute -y ./src/pl_stages/memory -y ./src/pl_stages/writeback -y ./src/pl_stages/hazard
+# SRC_REGS=  -y ./src/pl_regs
+# SRC_UTILS=  -y ./src/utils
+SRC_FILES= -y ./src
+TEST_PATH = ./test/$(top)_tb.v
+VERILATOR_INPUT = $(TEST_PATH) $(SRC_FILES)
+
+default: run
+
+run:
+	@echo "Compiling testbench"
+	$(VERILATOR) $(VERILATOR_FLAGS) $(VERILATOR_INPUT)
+	./obj_dir/V$(top)_tb +trace
+	gtkwave dumpfile.vcd
+
+# Other targets
+power:
+	python ./scripts/power.py $(top)
+
+syn:
+	python ./scripts/synth.py "$(top)"
 
 gh:
-	git add . -A
-	git commit -m "$(msg)"
-	xclip -sel c < ~/git_stuff/key.txt
-	git push origin main
+	python ./scripts/git.py "$(msg)" "$(branch)"
 
-svi:
-	cat ./src/pl_stages/fetch/code.hex > ~/git_stuff/RISCV-Vivado/$(TYPE)$(STAGES)stage/$(TYPE)$(STAGES)stage.srcs/sources_1/new/code.hex
-	cat ~/git_stuff/RISCV-Vivado/$(TYPE)$(STAGES)stage/$(TYPE)$(STAGES)stage.srcs/sources_1/new/code.hex
-	python3 ./scripts/setup_vivado.py "$(TYPE)" "$(STAGES)"
+hex:
+	python ./scripts/hex.py
 
+help:
+	@echo "Run commands using make [command] [args]"
+	@echo "The command list is: "
+	@echo "help - print out this message"
+	@echo ""
+	@echo "run - compiles and simulates the design"
+	@echo "args"
+	@echo "top - path to top module"
+	@echo ""
+	@echo "gh - pushes all changes to remote github repo"
+	@echo "args"
+	@echo "msg - commit message"
+	@echo "branch - branch to push changes to"
+	@echo ""
+	@echo "hex - creates a hex file based on a test.c"
+	@echo ""
+	@echo "show-config - displays version"
+	@echo ""
+	@echo "clean - delete unecessary files"
+
+show-config:
+	$(VERILATOR) -V
 
 clean:
-	rm -rf a.out dumpfile.vcd
+	-rm -rf obj_dir logs *.log *.dmp *.vcd coverage.dat core
 	clear
