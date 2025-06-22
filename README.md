@@ -10,6 +10,8 @@ A repo for the 6th semester experiential learning project
 Contains a 5-stage pipelined core, based on a modified version of the design presented in Harris and Harris
 ### v2
 Contains a modified version of the v1 core with multithreading implementation
+### v4
+Contains an updated multi threaded implementation with sliding window register file and imporved clock frequency
 
 ####
 - scripts contains various scripts used for managing building, simulation, and github access
