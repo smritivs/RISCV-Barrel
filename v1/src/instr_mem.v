@@ -12,7 +12,7 @@ module instr_mem #(
 // array of 32-bit words or instructions
 reg [DATA_WIDTH-1:0] instr_rom [0:MEM_SIZE-1];
 initial begin
-        $readmemh("./src/code.mem", instr_rom);
+        $readmemh("./src/test.mem", instr_rom);
     end
 
 // word-aligned memory access

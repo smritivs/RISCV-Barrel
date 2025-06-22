@@ -1,0 +1,8 @@
+./src/bfadd.v
+./src/bfclass.v
+./src/bfcomp.v
+./src/bfconv.v
+./src/bfminmax.v
+./src/bfmul.v
+./src/bfsinj.v
+./src/fpuseq.v

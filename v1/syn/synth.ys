@@ -1,0 +1,10 @@
+read_liberty -lib ~/skywater-pdk/libraries/sky130_fd_sc_hd/latest/timing/sky130_fd_sc_hd__tt_025C_1v80.lib
+read_verilog_file_list -f ./syn/file_list.txt
+synth -top cpu
+flatten
+dfflibmap -liberty ~/skywater-pdk/libraries/sky130_fd_sc_hd/latest/timing/sky130_fd_sc_hd__tt_025C_1v80.lib
+abc -liberty ~/skywater-pdk/libraries/sky130_fd_sc_hd/latest/timing/sky130_fd_sc_hd__tt_025C_1v80.lib
+clean
+write_verilog -noattr -noexpr -nohex -nodec ./syn/nl.v
+stat -liberty ~/skywater-pdk/libraries/sky130_fd_sc_hd/latest/timing/sky130_fd_sc_hd__tt_025C_1v80.lib -tech cmos
+tee -o ./syn/area.txt stat -liberty ~/skywater-pdk/libraries/sky130_fd_sc_hd/latest/timing/sky130_fd_sc_hd__tt_025C_1v80.lib -tech cmos

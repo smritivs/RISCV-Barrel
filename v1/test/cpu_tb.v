@@ -20,7 +20,7 @@ module cpu_tb ();
         clk = 0;
     end
 
-    always #5 clk = ~clk;
+    always #75 clk = ~clk;
 
     initial begin
         $dumpfile("dumpfile.vcd");
@@ -29,7 +29,7 @@ module cpu_tb ();
         rst = 1;
         #5 rst = 0;
 
-        #1000 $finish();
+        #10000 $finish();
 
     end
 endmodule

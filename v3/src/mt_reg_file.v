@@ -11,7 +11,7 @@ module mt_reg_file #(
 
 localparam BITS_THREADS = $clog2(NUM_THREADS);
 
-reg [DATA_WIDTH-1:0] reg_array [0:32*NUM_THREADS-1];
+reg [DATA_WIDTH-1:0] reg_array [0:16*NUM_THREADS-1];
 
 integer i;
 
@@ -24,12 +24,12 @@ end
 // synchronous write logic
 always @(posedge clk) begin
     if(write_enable) begin
-        reg_array[tid_write*32 + a3] <= wd3;
+        reg_array[tid_write*16 + a3[3:0]] <= wd3;
     end
 end
 
 //asynchronous read logic
-assign rd1 = (a1 == 5'd0) ? (32'd0) : (reg_array[tid_read*32 + a1]);
-assign rd2 = (a2 == 5'd0) ? (32'd0) : (reg_array[tid_read*32 + a2]);
+assign rd1 = (a1[3:0] == 4'd0) ? (32'd0) : (reg_array[tid_read*16 + a1[3:0]]);
+assign rd2 = (a2[3:0] == 4'd0) ? (32'd0) : (reg_array[tid_read*16 + a2[3:0]]);
 
 endmodule

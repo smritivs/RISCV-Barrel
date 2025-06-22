@@ -1,7 +1,7 @@
 module mt_cpu_tb ();
     parameter ADDRESS_WIDTH = 32;
     parameter DATA_WIDTH = 32;
-    parameter NUM_THREADS = 8;
+    parameter NUM_THREADS = 4;
     parameter DMEM_SIZE = 64;
     parameter IMEM_SIZE = 1024;
 
@@ -30,7 +30,7 @@ module mt_cpu_tb ();
         clk = 0;
     end
 
-    always #5 clk = ~clk;
+    always #75 clk = ~clk;
 
     initial begin
         $dumpfile("dumpfile.vcd");
@@ -39,7 +39,7 @@ module mt_cpu_tb ();
         rst = 1;
         #10 rst = 0;
 
-        #10000 $finish();
+        #100000 $finish();
 
     end
 endmodule

@@ -1,0 +1,10 @@
+read_liberty ~/skywater-pdk/libraries/sky130_fd_sc_hd/latest/timing/sky130_fd_sc_hd__tt_025C_1v80.lib
+read_verilog ./syn/nl.v
+link_design mt_cpu
+read_sdc ./syn/cons.sdc
+read_vcd ./dumpfile.vcd
+report_checks
+report_power
+report_checks > ./syn/lp_timing.txt
+report_power > ./syn/lp_power.txt
+exit
