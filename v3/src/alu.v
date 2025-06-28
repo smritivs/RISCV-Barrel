@@ -21,5 +21,7 @@ always @(*) begin
         4'b1101: res = b;
         default: res = 32'd0;
     endcase
+
+    
 end
 endmodule

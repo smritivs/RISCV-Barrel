@@ -5,6 +5,6 @@ read_sdc ./syn/cons.sdc
 read_vcd ./dumpfile.vcd
 report_checks
 report_power
-report_checks > ./syn/lp_timing.txt
-report_power > ./syn/lp_power.txt
+report_checks > ./syn/timing.txt
+report_power > ./syn/power.txt
 exit

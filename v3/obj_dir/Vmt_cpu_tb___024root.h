@@ -73,6 +73,8 @@ class alignas(VL_CACHE_LINE_BYTES) Vmt_cpu_tb___024root final : public Verilated
     VlUnpacked<IData/*31:0*/, 4> mt_cpu_tb__DOT__dut__DOT__fetch_stage__DOT__thread_pc__DOT__t_pc;
     VlUnpacked<IData/*31:0*/, 1024> mt_cpu_tb__DOT__dut__DOT__fetch_stage__DOT__i_mem__DOT__instr_rom;
     VlUnpacked<IData/*31:0*/, 64> mt_cpu_tb__DOT__dut__DOT__decode_stage__DOT__rf__DOT__reg_array;
+    VlUnpacked<IData/*31:0*/, 16> mt_cpu_tb__DOT__dut__DOT__decode_stage__DOT__rf__DOT__curr_reg_read;
+    VlUnpacked<IData/*31:0*/, 16> mt_cpu_tb__DOT__dut__DOT__decode_stage__DOT__rf__DOT__curr_reg_write;
     VlUnpacked<IData/*31:0*/, 64> mt_cpu_tb__DOT__dut__DOT__memory_stage__DOT__dm__DOT__ram;
     VlUnpacked<CData/*0:0*/, 2> __Vm_traceActivity;
     VlDelayScheduler __VdlySched;

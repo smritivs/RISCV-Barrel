@@ -56,18 +56,10 @@ run:
 	./obj_dir/V$(top)_tb +trace
 	gtkwave dumpfile.vcd
 
-# Other targets
-power:
-	python ./scripts/power.py $(top)
 
-syn:
-	python ./scripts/synth.py "$(top)"
 
 gh:
 	python ./scripts/git.py "$(msg)" "$(branch)"
-
-hex:
-	python ./scripts/hex.py
 
 help:
 	@echo "Run commands using make [command] [args]"

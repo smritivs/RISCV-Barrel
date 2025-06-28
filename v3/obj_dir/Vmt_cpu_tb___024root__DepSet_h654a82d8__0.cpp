@@ -19,11 +19,11 @@ VL_INLINE_OPT VlCoroutine Vmt_cpu_tb___024root___eval_initial__TOP__Vtiming__0(V
     vlSymsp->_vm_contextp__->dumpfile(VL_CVT_PACK_STR_NW(3, __Vtemp_1));
     vlSymsp->_traceDumpOpen();
     vlSelfRef.mt_cpu_tb__DOT__rst = 1U;
-    co_await vlSelfRef.__VdlySched.delay(0xaULL, nullptr, 
+    co_await vlSelfRef.__VdlySched.delay(0xeULL, nullptr, 
                                          "test/mt_cpu_tb.v", 
                                          40);
     vlSelfRef.mt_cpu_tb__DOT__rst = 0U;
-    co_await vlSelfRef.__VdlySched.delay(0x186a0ULL, 
+    co_await vlSelfRef.__VdlySched.delay(0xf4240ULL, 
                                          nullptr, "test/mt_cpu_tb.v", 
                                          42);
     VL_FINISH_MT("test/mt_cpu_tb.v", 42, "");

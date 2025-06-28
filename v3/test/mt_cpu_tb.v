@@ -30,16 +30,16 @@ module mt_cpu_tb ();
         clk = 0;
     end
 
-    always #75 clk = ~clk;
+    always #14 clk = ~clk;
 
     initial begin
         $dumpfile("dumpfile.vcd");
         $dumpvars(0, mt_cpu_tb);
 
         rst = 1;
-        #10 rst = 0;
+        #14 rst = 0;
 
-        #100000 $finish();
+        #1000000 $finish();
 
     end
 endmodule

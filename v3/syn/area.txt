@@ -2,96 +2,90 @@
 
 === mt_cpu ===
 
-   Number of wires:              10038
-   Number of wire bits:          17674
-   Number of public wires:         429
-   Number of public wire bits:    8065
+   Number of wires:              12390
+   Number of wire bits:          20337
+   Number of public wires:         440
+   Number of public wire bits:    8387
    Number of ports:                  4
    Number of port bits:             66
    Number of memories:               0
    Number of memory bits:            0
    Number of processes:              0
-   Number of cells:              14409
+   Number of cells:              17070
      $scopeinfo                     19
-     sky130_fd_sc_hd__a2111oi_0     15
-     sky130_fd_sc_hd__a211o_1       26
-     sky130_fd_sc_hd__a211oi_1     101
-     sky130_fd_sc_hd__a21bo_1        2
-     sky130_fd_sc_hd__a21boi_0      14
+     sky130_fd_sc_hd__a2111oi_0     22
+     sky130_fd_sc_hd__a211o_1        6
+     sky130_fd_sc_hd__a211oi_1      55
+     sky130_fd_sc_hd__a21bo_1        3
+     sky130_fd_sc_hd__a21boi_0       4
      sky130_fd_sc_hd__a21o_1        21
-     sky130_fd_sc_hd__a21oi_1     1206
+     sky130_fd_sc_hd__a21oi_1     2022
      sky130_fd_sc_hd__a221o_1        6
-     sky130_fd_sc_hd__a221oi_1     509
-     sky130_fd_sc_hd__a222oi_1     488
-     sky130_fd_sc_hd__a22o_1        50
-     sky130_fd_sc_hd__a22oi_1      287
+     sky130_fd_sc_hd__a221oi_1     160
+     sky130_fd_sc_hd__a222oi_1    1148
+     sky130_fd_sc_hd__a22o_1        61
+     sky130_fd_sc_hd__a22oi_1      340
      sky130_fd_sc_hd__a2bb2o_1       3
-     sky130_fd_sc_hd__a2bb2oi_1      4
-     sky130_fd_sc_hd__a311o_1        3
-     sky130_fd_sc_hd__a311oi_1      24
-     sky130_fd_sc_hd__a31o_1         6
-     sky130_fd_sc_hd__a31oi_1      430
-     sky130_fd_sc_hd__a32o_1         4
-     sky130_fd_sc_hd__a32oi_1       19
-     sky130_fd_sc_hd__a41o_1         2
-     sky130_fd_sc_hd__a41oi_1       11
-     sky130_fd_sc_hd__and2_0        61
-     sky130_fd_sc_hd__and3_1        29
-     sky130_fd_sc_hd__and3b_1        4
-     sky130_fd_sc_hd__and4b_1        1
-     sky130_fd_sc_hd__clkinv_1     384
-     sky130_fd_sc_hd__dfxtp_1      495
-     sky130_fd_sc_hd__edfxtp_1    4224
-     sky130_fd_sc_hd__lpflow_inputiso1p_1     28
-     sky130_fd_sc_hd__lpflow_isobufsrc_1    267
-     sky130_fd_sc_hd__maj3_1         9
-     sky130_fd_sc_hd__mux2_1        51
-     sky130_fd_sc_hd__mux2i_1      294
-     sky130_fd_sc_hd__mux4_2       470
-     sky130_fd_sc_hd__nand2_1      942
-     sky130_fd_sc_hd__nand2b_1      38
-     sky130_fd_sc_hd__nand3_1      155
-     sky130_fd_sc_hd__nand3b_1      11
-     sky130_fd_sc_hd__nand4_1       48
-     sky130_fd_sc_hd__nand4b_1       2
-     sky130_fd_sc_hd__nand4bb_1      2
-     sky130_fd_sc_hd__nor2_1      1177
-     sky130_fd_sc_hd__nor2b_1        5
-     sky130_fd_sc_hd__nor3_1       188
-     sky130_fd_sc_hd__nor3b_1       12
-     sky130_fd_sc_hd__nor4_1        85
-     sky130_fd_sc_hd__nor4b_1        2
-     sky130_fd_sc_hd__nor4bb_1       3
-     sky130_fd_sc_hd__o2111a_1       1
-     sky130_fd_sc_hd__o2111ai_1     15
+     sky130_fd_sc_hd__a2bb2oi_1      2
+     sky130_fd_sc_hd__a311o_1        4
+     sky130_fd_sc_hd__a311oi_1      28
+     sky130_fd_sc_hd__a31o_1         4
+     sky130_fd_sc_hd__a31oi_1      451
+     sky130_fd_sc_hd__a32o_1         6
+     sky130_fd_sc_hd__a32oi_1       18
+     sky130_fd_sc_hd__a41o_1         1
+     sky130_fd_sc_hd__a41oi_1        6
+     sky130_fd_sc_hd__and2_0        71
+     sky130_fd_sc_hd__and3_1        34
+     sky130_fd_sc_hd__and3b_1        5
+     sky130_fd_sc_hd__and4_1         1
+     sky130_fd_sc_hd__clkinv_1      79
+     sky130_fd_sc_hd__dfxtp_1      975
+     sky130_fd_sc_hd__edfxtp_1    4096
+     sky130_fd_sc_hd__lpflow_inputiso1p_1     38
+     sky130_fd_sc_hd__lpflow_isobufsrc_1    238
+     sky130_fd_sc_hd__maj3_1        11
+     sky130_fd_sc_hd__mux2_1        39
+     sky130_fd_sc_hd__mux2i_1       89
+     sky130_fd_sc_hd__mux4_2        20
+     sky130_fd_sc_hd__nand2_1     2383
+     sky130_fd_sc_hd__nand2b_1      48
+     sky130_fd_sc_hd__nand3_1      199
+     sky130_fd_sc_hd__nand3b_1      10
+     sky130_fd_sc_hd__nand4_1       57
+     sky130_fd_sc_hd__nand4b_1       3
+     sky130_fd_sc_hd__nor2_1      2350
+     sky130_fd_sc_hd__nor2b_1        4
+     sky130_fd_sc_hd__nor3_1       178
+     sky130_fd_sc_hd__nor3b_1       14
+     sky130_fd_sc_hd__nor4_1        70
+     sky130_fd_sc_hd__nor4b_1        1
+     sky130_fd_sc_hd__o2111ai_1     13
      sky130_fd_sc_hd__o211a_1        2
-     sky130_fd_sc_hd__o211ai_1      48
-     sky130_fd_sc_hd__o21a_1        33
-     sky130_fd_sc_hd__o21ai_0     1339
-     sky130_fd_sc_hd__o21ba_1        1
-     sky130_fd_sc_hd__o21bai_1       9
-     sky130_fd_sc_hd__o221a_1       11
-     sky130_fd_sc_hd__o221ai_1     240
-     sky130_fd_sc_hd__o22a_1         4
-     sky130_fd_sc_hd__o22ai_1      248
+     sky130_fd_sc_hd__o211ai_1      63
+     sky130_fd_sc_hd__o21a_1        52
+     sky130_fd_sc_hd__o21ai_0     1133
+     sky130_fd_sc_hd__o221ai_1      32
+     sky130_fd_sc_hd__o22a_1         2
+     sky130_fd_sc_hd__o22ai_1      184
      sky130_fd_sc_hd__o2bb2ai_1      2
-     sky130_fd_sc_hd__o311a_1        6
-     sky130_fd_sc_hd__o311ai_0      23
-     sky130_fd_sc_hd__o31a_1         5
-     sky130_fd_sc_hd__o31ai_1       34
-     sky130_fd_sc_hd__o32a_1        15
-     sky130_fd_sc_hd__o32ai_1       34
-     sky130_fd_sc_hd__o41ai_1       11
-     sky130_fd_sc_hd__or3_1         20
-     sky130_fd_sc_hd__or3b_1         4
-     sky130_fd_sc_hd__or4_1          6
-     sky130_fd_sc_hd__xnor2_1       31
-     sky130_fd_sc_hd__xor2_1        30
+     sky130_fd_sc_hd__o311a_1        4
+     sky130_fd_sc_hd__o311ai_0      24
+     sky130_fd_sc_hd__o31a_1         3
+     sky130_fd_sc_hd__o31ai_1       29
+     sky130_fd_sc_hd__o32a_1         6
+     sky130_fd_sc_hd__o32ai_1       13
+     sky130_fd_sc_hd__o41ai_1       13
+     sky130_fd_sc_hd__or3_1         18
+     sky130_fd_sc_hd__or3b_1         3
+     sky130_fd_sc_hd__or4_1         12
+     sky130_fd_sc_hd__xnor2_1       37
+     sky130_fd_sc_hd__xor2_1        22
 
    Area for cell type $scopeinfo is unknown!
 
-   Chip area for module '\mt_cpu': 201896.134400
-     of which used for sequential elements: 136751.155200 (67.73%)
+   Chip area for module '\mt_cpu': 208293.520000
+     of which used for sequential elements: 142516.684800 (68.42%)
 
    Estimated number of transistors:          0+
 
