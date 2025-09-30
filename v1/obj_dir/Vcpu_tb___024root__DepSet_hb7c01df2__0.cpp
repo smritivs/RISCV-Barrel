@@ -19,7 +19,7 @@ VL_INLINE_OPT VlCoroutine Vcpu_tb___024root___eval_initial__TOP__Vtiming__0(Vcpu
     vlSymsp->_vm_contextp__->dumpfile(VL_CVT_PACK_STR_NW(3, __Vtemp_1));
     vlSymsp->_traceDumpOpen();
     vlSelfRef.cpu_tb__DOT__rst = 1U;
-    co_await vlSelfRef.__VdlySched.delay(5ULL, nullptr, 
+    co_await vlSelfRef.__VdlySched.delay(0xeULL, nullptr, 
                                          "test/cpu_tb.v", 
                                          30);
     vlSelfRef.cpu_tb__DOT__rst = 0U;
@@ -27,6 +27,20 @@ VL_INLINE_OPT VlCoroutine Vcpu_tb___024root___eval_initial__TOP__Vtiming__0(Vcpu
                                          nullptr, "test/cpu_tb.v", 
                                          32);
     VL_FINISH_MT("test/cpu_tb.v", 32, "");
+}
+
+VL_INLINE_OPT VlCoroutine Vcpu_tb___024root___eval_initial__TOP__Vtiming__1(Vcpu_tb___024root* vlSelf) {
+    VL_DEBUG_IF(VL_DBG_MSGF("+    Vcpu_tb___024root___eval_initial__TOP__Vtiming__1\n"); );
+    Vcpu_tb__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
+    auto& vlSelfRef = std::ref(*vlSelf).get();
+    // Body
+    while (VL_LIKELY(!vlSymsp->_vm_contextp__->gotFinish())) {
+        co_await vlSelfRef.__VdlySched.delay(0xeULL, 
+                                             nullptr, 
+                                             "test/cpu_tb.v", 
+                                             23);
+        vlSelfRef.cpu_tb__DOT__clk = (1U & (~ (IData)(vlSelfRef.cpu_tb__DOT__clk)));
+    }
 }
 
 #ifdef VL_DEBUG
@@ -38,9 +52,9 @@ void Vcpu_tb___024root___eval_triggers__act(Vcpu_tb___024root* vlSelf) {
     Vcpu_tb__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
     auto& vlSelfRef = std::ref(*vlSelf).get();
     // Body
-    vlSelfRef.__VactTriggered.set(0U, ((IData)(vlSelfRef.cpu_tb__DOT__clk) 
-                                       & (~ (IData)(vlSelfRef.__Vtrigprevexpr___TOP__cpu_tb__DOT__clk__0))));
-    vlSelfRef.__VactTriggered.set(1U, vlSelfRef.__VdlySched.awaitingCurrentTime());
+    vlSelfRef.__VactTriggered.setBit(0U, ((IData)(vlSelfRef.cpu_tb__DOT__clk) 
+                                          & (~ (IData)(vlSelfRef.__Vtrigprevexpr___TOP__cpu_tb__DOT__clk__0))));
+    vlSelfRef.__VactTriggered.setBit(1U, vlSelfRef.__VdlySched.awaitingCurrentTime());
     vlSelfRef.__Vtrigprevexpr___TOP__cpu_tb__DOT__clk__0 
         = vlSelfRef.cpu_tb__DOT__clk;
 #ifdef VL_DEBUG

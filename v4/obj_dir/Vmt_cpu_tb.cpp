@@ -135,7 +135,7 @@ VL_ATTR_COLD void Vmt_cpu_tb::traceBaseModel(VerilatedTraceBaseC* tfp, int level
     VerilatedVcdC* const stfp = dynamic_cast<VerilatedVcdC*>(tfp);
     if (VL_UNLIKELY(!stfp)) {
         vl_fatal(__FILE__, __LINE__, __FILE__,"'Vmt_cpu_tb::trace()' called on non-VerilatedVcdC object;"
-            " use --trace-fst with VerilatedFst object, and --trace with VerilatedVcd object");
+            " use --trace-fst with VerilatedFst object, and --trace-vcd with VerilatedVcd object");
     }
     stfp->spTrace()->addModel(this);
     stfp->spTrace()->addInitCb(&trace_init, &(vlSymsp->TOP));

@@ -20,14 +20,14 @@ module cpu_tb ();
         clk = 0;
     end
 
-    always #75 clk = ~clk;
+    always #14 clk = ~clk;
 
     initial begin
         $dumpfile("dumpfile.vcd");
         $dumpvars(0, cpu_tb);
 
         rst = 1;
-        #5 rst = 0;
+        #14 rst = 0;
 
         #10000 $finish();
 

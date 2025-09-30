@@ -43,7 +43,7 @@ Vmt_cpu_tb__Syms::Vmt_cpu_tb__Syms(VerilatedContext* contextp, const char* namep
     , TOP{this, namep}
 {
         // Check resources
-        Verilated::stackCheck(480);
+        Verilated::stackCheck(314);
     // Configure time unit / time precision
     _vm_contextp__->timeunit(-12);
     _vm_contextp__->timeprecision(-12);

@@ -51,7 +51,6 @@ class alignas(VL_CACHE_LINE_BYTES) Vcpu_tb___024root final : public VerilatedMod
     IData/*31:0*/ cpu_tb__DOT__dut__DOT__pc_d_i;
     IData/*31:0*/ cpu_tb__DOT__dut__DOT__pc_plus4_d_i;
     IData/*31:0*/ cpu_tb__DOT__dut__DOT__instr_d_i;
-    IData/*31:0*/ cpu_tb__DOT__dut__DOT__imm_val_d_o;
     IData/*31:0*/ cpu_tb__DOT__dut__DOT__rd1_e_i;
     IData/*31:0*/ cpu_tb__DOT__dut__DOT__rd2_e_i;
     IData/*31:0*/ cpu_tb__DOT__dut__DOT__imm_val_e_i;
@@ -70,7 +69,6 @@ class alignas(VL_CACHE_LINE_BYTES) Vcpu_tb___024root final : public VerilatedMod
     IData/*31:0*/ cpu_tb__DOT__dut__DOT__decode_stage__DOT__rf__DOT__i;
     IData/*31:0*/ cpu_tb__DOT__dut__DOT__execute_stage__DOT__a_alu;
     IData/*31:0*/ cpu_tb__DOT__dut__DOT__execute_stage__DOT__b_alu;
-    IData/*31:0*/ cpu_tb__DOT__dut__DOT__memory_stage__DOT__dm__DOT__word;
     IData/*31:0*/ cpu_tb__DOT__dut__DOT__memory_stage__DOT__dm__DOT__i;
     IData/*31:0*/ __VactIterCount;
     VlUnpacked<IData/*31:0*/, 1024> cpu_tb__DOT__dut__DOT__fetch_stage__DOT__i_mem__DOT__instr_rom;

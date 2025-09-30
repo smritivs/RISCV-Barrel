@@ -19,7 +19,7 @@ VL_INLINE_OPT VlCoroutine Vmt_cpu_tb___024root___eval_initial__TOP__Vtiming__0(V
     vlSymsp->_vm_contextp__->dumpfile(VL_CVT_PACK_STR_NW(3, __Vtemp_1));
     vlSymsp->_traceDumpOpen();
     vlSelfRef.mt_cpu_tb__DOT__rst = 1U;
-    co_await vlSelfRef.__VdlySched.delay(0xaULL, nullptr, 
+    co_await vlSelfRef.__VdlySched.delay(0xeULL, nullptr, 
                                          "test/mt_cpu_tb.v", 
                                          40);
     vlSelfRef.mt_cpu_tb__DOT__rst = 0U;
@@ -38,9 +38,9 @@ void Vmt_cpu_tb___024root___eval_triggers__act(Vmt_cpu_tb___024root* vlSelf) {
     Vmt_cpu_tb__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
     auto& vlSelfRef = std::ref(*vlSelf).get();
     // Body
-    vlSelfRef.__VactTriggered.set(0U, ((IData)(vlSelfRef.mt_cpu_tb__DOT__clk) 
-                                       & (~ (IData)(vlSelfRef.__Vtrigprevexpr___TOP__mt_cpu_tb__DOT__clk__0))));
-    vlSelfRef.__VactTriggered.set(1U, vlSelfRef.__VdlySched.awaitingCurrentTime());
+    vlSelfRef.__VactTriggered.setBit(0U, ((IData)(vlSelfRef.mt_cpu_tb__DOT__clk) 
+                                          & (~ (IData)(vlSelfRef.__Vtrigprevexpr___TOP__mt_cpu_tb__DOT__clk__0))));
+    vlSelfRef.__VactTriggered.setBit(1U, vlSelfRef.__VdlySched.awaitingCurrentTime());
     vlSelfRef.__Vtrigprevexpr___TOP__mt_cpu_tb__DOT__clk__0 
         = vlSelfRef.mt_cpu_tb__DOT__clk;
 #ifdef VL_DEBUG

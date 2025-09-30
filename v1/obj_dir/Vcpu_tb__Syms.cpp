@@ -14,12 +14,12 @@ Vcpu_tb__Syms::~Vcpu_tb__Syms()
 }
 
 void Vcpu_tb__Syms::_traceDump() {
-    const VerilatedLockGuard lock(__Vm_dumperMutex);
+    const VerilatedLockGuard lock{__Vm_dumperMutex};
     __Vm_dumperp->dump(VL_TIME_Q());
 }
 
 void Vcpu_tb__Syms::_traceDumpOpen() {
-    const VerilatedLockGuard lock(__Vm_dumperMutex);
+    const VerilatedLockGuard lock{__Vm_dumperMutex};
     if (VL_UNLIKELY(!__Vm_dumperp)) {
         __Vm_dumperp = new VerilatedVcdC();
         __Vm_modelp->trace(__Vm_dumperp, 0, 0);
@@ -30,7 +30,7 @@ void Vcpu_tb__Syms::_traceDumpOpen() {
 }
 
 void Vcpu_tb__Syms::_traceDumpClose() {
-    const VerilatedLockGuard lock(__Vm_dumperMutex);
+    const VerilatedLockGuard lock{__Vm_dumperMutex};
     __Vm_dumping = false;
     VL_DO_CLEAR(delete __Vm_dumperp, __Vm_dumperp = nullptr);
 }
@@ -43,7 +43,7 @@ Vcpu_tb__Syms::Vcpu_tb__Syms(VerilatedContext* contextp, const char* namep, Vcpu
     , TOP{this, namep}
 {
         // Check resources
-        Verilated::stackCheck(170);
+        Verilated::stackCheck(178);
     // Configure time unit / time precision
     _vm_contextp__->timeunit(-12);
     _vm_contextp__->timeprecision(-12);

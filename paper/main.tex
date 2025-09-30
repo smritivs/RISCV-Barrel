@@ -1,0 +1,244 @@
+\documentclass[conference]{IEEEtran}
+\usepackage{float}      % For [H] float placement
+\floatstyle{plaintop}
+\restylefloat{table}
+\usepackage{array}
+\usepackage{siunitx}
+\IEEEoverridecommandlockouts
+% The preceding line is only needed to identify funding in the first footnote. If that is unneeded, please comment it out.
+\usepackage{cite}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{algorithmic}
+\usepackage{graphicx}
+\usepackage{textcomp}
+\usepackage{xcolor}
+\usepackage{multirow}
+\def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
+    T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
+\begin{document}
+
+\title{Sustainable Server Processors for Smart Cities\\
+
+}
+
+\author{\IEEEauthorblockN{Balasai Anish Ponnaluri}
+\IEEEauthorblockA{\textit{Department of Electronics and Communication} \\
+\textit{R.V. College of Engineering}\\
+Bangalore, India\\
+balasaianishp.ec22@rvce.edu.in}
+\IEEEauthorblockN{Aditya Srinivas}
+\IEEEauthorblockA{\textit{Department of Electronics and Instrumentation} \\
+\textit{R.V. College of Engineering}\\
+Bangalore, India\\
+adityasrinivas.ei22@rvce.edu.in}
+\IEEEauthorblockN{Dr. Azra Nasreen}
+\IEEEauthorblockA{\textit{Department of Computer Science} \\
+\textit{R.V. College of Engineering}\\
+Bangalore, India\\
+azranasreen@rvce.edu.in}
+\and
+\IEEEauthorblockN{Smriti V Soolebhavi}
+\IEEEauthorblockA{\textit{Department of Electronics and Communication)} \\
+\textit{R.V. College of Engineering}\\
+Bangalore, India\\
+smritivs.ec22@rvce.edu.in}
+
+\IEEEauthorblockN{Ayush Bhardwaj}
+\IEEEauthorblockA{\textit{Department of Electronics and Instrumentation} \\
+\textit{R.V. College of Engineering}\\
+Bangalore, India\\
+ayushbhardwaj.ei22@rvce.edu.in}
+}
+
+\maketitle
+
+\begin{abstract}
+In recent years, there has been a rapid expansion of internet-based services which has led to a significant increase in data center deployments. These data centers have raised energy consumption and cooling requirements, threatening the sustainability of smart urban infrastructures. This paper presents the design and implementation of a fine-grained multi threaded processor optimized for low power consumption and minimal hardware usage. The processor is based on the open source RISC-V ISA and uses hardware multi threading and a five-stage pipeline to achieve higher throughput.
+
+\end{abstract}
+
+\begin{IEEEkeywords}
+RISC-V, Multithreading, Energy efficiency, Servers
+\end{IEEEkeywords}
+
+\section{Introduction}
+Due to the immense heat produced by data centers and large clusters of processors, it has become increasingly difficult to find suitable locations without compromising the integrity of the environment. Increasingly innovative cooling solutions have to be developed to manage the immense heat produced by these servers. Server workloads often have many independent processes running in parallel, each with significant thread divergence. Servers are expected to deliver a wide variety of services for users which must be simultaneous and independent. Multithreading is a common technique used to improve throughput and efficiency in a processor. The proposed design leverages fine grained multi threading to eliminate pipeline hazards and achieve a higher clock frequency. The proposed design has been evaluated for the Basys 3 FPGA board and for the Skywater 130nm technology node. For the FPGA the design shows a small increase in power dissipation but an increase in speed. The Skywater 130nm implementation also shows a significant improvement in speed albeit at the cost of increased area for storing thread context. This suggests that server processors may benefit significantly from the speed up and exploiting thread level parallelism.
+\section{Background}
+
+\subsection{Power and Scalability Challenges in Server Infrastructure}
+
+Server deployments have increased dramatically worldwide as a result of the rapid development of cloud services, edge computing, and smart city platforms. These data centers typically use powerful high-performance processors that require a large amount of cooling infrastructure. Thermal output and power consumption have become major issues as cities work to implement sustainable digital practices. Although high-end processors like out-of-order superscalar architectures can handle complex tasks quickly, they tend to consume a lot of power and take up significant space on the chip. In such processors the overhead such as the register renaming die, scoreboard, and other control logic takes up a significant part of the area. This makes them a poor fit for systems that need to be energy-efficient and cost-effective. Simpler processor designs that dissipate less power or occupy less area are a better choice  in terms of sustainability.
+
+\subsection{Multi threading in Processor Design}
+
+Multithreading is a design approach where a single processor core handles multiple threads by switching between them quickly or running parts of them at the same time, in a parallelized manner. Unlike multicore systems, that use separate hardware for each task, a multi threaded processor shares key components like the ALU, instruction decoder, and registers across threads. This makes it possible to do more work without adding extra hardware, which helps save both space and power. It’s especially useful in situations where some tasks might otherwise cause delays, as multi threading helps keep things moving efficiently.
+
+For out of order superscalar cores simultaneous multithreading is the most common approach. Desktop processors usually feature a small number of threads per core due to the cost of storing the thread state. Coarse grain multi threading still requires hazard checking logic and sacrifices overall system throughput for better single thread performance. Fine grain multi threading is an appropriate scheme for the proposed design as it has minimal hardware overhead and can eliminate pipeline hazards and associated hardware completely. Fine grain multi threading is able to deliver high levels of parallelism, high throughput, and less power dissipation.
+
+\section{Literature Survey}
+\begin{flushleft}
+The need for greener cloud computing and techniques that can be used to improve sustainability is discussed in \cite{GreenSKU} where one of the findings was that cloud computing providers are significantly over provisioned with compute. Many customers under utilize the available resources. Many customers may still prefer older versions of VMs for a variety of reasons. This shows that existing infrastructure is significantly faster. Such a performance focused approach sacrifices sustainability without a significant gain. A component used in this paper for the development of a green SKU is an energy efficient CPU which features an extremely high number of threads. Such processors are designed for server workloads and exhibit better energy efficiency. However these commercial processors are based on the x86 ISA and have the problems associated with a CISC ISA such as backwards compatibility for multiple extensions, difficulty of pipelining, and variable execution length.
+\end{flushleft}
+
+\begin{flushleft}
+The system \cite{OffloadRISCV} offloads jobs from an x86 server to a RISC-V hardware to reduce energy consumption while boosting the throughput. The evaluation results show that using the offloading approach yields up to a 20\% increase in performance. In addition to performance gains, the system achieves a 16\% improvement in energy efficiency for compute-intensive workloads. RISC-V exhibits better energy efficiency due to its simplicity.
+\end{flushleft}
+
+\begin{flushleft}
+A multi threaded RISC-V processor \cite{MTRTS} explicitly tailored for real-time systems allows for dynamic thread manipulation which encompasses creation, execution, halting, deletion, and more- to emulate the behavior of tasks in a real-time operating system’s task queue. The proposed processor is equipped with eight logical cores, enabling simultaneous execution of up to eight threads. The multithreaded execution yields an instruction per cycle (IPC) rate that surpasses single-threaded execution by up to 5.5 times. Even in cost and power constrained applications such as embedded systems, fine grain multi threading can be used to achieve better throughput at a lower cost.
+\end{flushleft}
+
+\begin{flushleft}
+The processor based on the RV32I base instruction set with additional custom control and status registers and runs at 250 MHz, achieving a CPI of 1, and consuming approximately 0.372 W of power proposed in \cite{NNAccel}. The processor architecture effectively leverages 8 hardware threads in a 5-stage pipeline to achieve efficient parallelism for DNN acceleration, minimizing stalls through strict round-robin scheduling.
+\end{flushleft}
+
+\begin{flushleft}
+A hardware/software co-design methodology aimed at mitigating performance bottlenecks in RISC-V-based multicore systems while maintaining minimal resource utilization is proposed in \cite{MTCODES}. There is a core responsible for creating new threads called the main core. The main core creates threads by subscribing the thread’s information to the income thread’s FIFO. The multi-thread implementation consistently completes the calculations much faster, with a speedup factor ranging from 4.20 to 4.60.
+\end{flushleft}
+
+\section{Methodology}
+The development of a sustainable server barrel processor follows a structured methodology consisting of research, design, simulation and evaluation.
+
+\subsection{Design}
+The design for the barrel processor has been specified using Verilog HDL. Two designs were developed for the analysis of the gains obtained through multithreading and pipelining.
+\begin{itemize}
+    \item 5-Stage Pipelined RISC-V core- A 5 stage (Fetch, Decode, Execute, Memory, Writeback) to enhance the clock frequency and reduce overall execution time. Requires additional hazard handling logic. Mitigates data hazards through stalls and forwarding while control hazards are mitigated by inserting pipeline bubbles.
+
+    \item Multithreaded Core- Building on the pipelined design the proposed design introduces fine-grain multi threading, allowing the processor to switch between different threads every clock cycle. This helps keep the pipeline busy even if a thread is waiting for data. The proposed processor is able to minimize costly stalls and improve functional unit utilization through this scheme.
+\end{itemize}
+
+\begin{flushleft}
+The design can be easily reconfigured to modify the number of threads along with the associated thread state. This allows the processor to be customized for certain applications or platforms based on the desired tradeoffs for performance, power, and area.
+\end{flushleft}
+
+\begin{flushleft}
+By keeping the number of threads high enough, all three types of hazards have been completely eliminated in the proposed design. A hazard is the result of a dependency of some kind between two instructions in the pipeline. Since each instruction in the pipeline is from an independent thread at any given point in time, there is no possibility for hazards to affect the output. This allows complex hazard checking logic to be eliminated from the design. Additionally the forwarding logic is removed which improves the performance of the design by reducing combinational logic in the execute stage.
+\end{flushleft}
+
+\subsection{Simulation and Functional Validation}
+\begin{flushleft}
+The design was compiled and verified using Verilator, a mature, fast, and open source Verilog compiler largely compliant with the IEEE Verilog and SystemVerilog standards. Verilator was also used to generate the required VCD files for GTKWave. Additionally the linting feature was used to quickly detect synthesizability issues, signal mismatches, and undefined behaviors without a full build. This allowed quick iterations on the RTL code and avoid difficult to debug issues.
+
+GTKWave, an open-source waveform viewer, was used to visualize the waveforms of internal registers, data buses, and control signals, allowing for detailed debugging and analysis of instruction execution flow. The pipeline operation was verified against expected outputs, ensuring that stalling, forwarding, and branch handling mechanisms worked as intended. In the multithreaded implementation GTKWave was used to check for the correct operation of the new componenets such as the PC and split register file. Fig. \ref{fig:verif} shows the implementation of the processor on GTKWave.
+
+\end{flushleft}
+
+
+\subsection{Base Processor Microarchitecture}
+The proposed processor architecture is built upon the standard 5-stage RISC-V pipeline, enhanced with fine-grain multithreading to improve instruction throughput and resource utilization.
+The five pipeline stages include:
+\begin{itemize}
+    \item Instruction Fetch (IF)
+\end{itemize}
+\begin{itemize}
+    \item Instruction Decode (ID)
+\end{itemize}
+\begin{itemize}
+    \item Execute (EX)
+\end{itemize}
+\begin{itemize}
+    \item Memory Access (MEM)
+\end{itemize}
+\begin{itemize}
+    \item Writeback (WB)
+\end{itemize}
+A high-level diagram of the base architecture is shown in Fig. \ref{fig:pipeline}, which illustrates the datapath, control signals, pipeline registers, hazard detection unit, and forwarding logic. The pipeline follows an in-order execution model with support for forwarding and stalling to resolve data hazards. Control hazards are handled through speculation and killing instructions on a mispredict.
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.47\textwidth]{pipeline.png}  % Path to your image file
+    \caption{Pipelined Processor Architecture \cite{HANDH}}  % Caption for the image
+
+        \label{fig:pipeline}  % Label for referencing the image
+\end{figure}
+
+\subsection{Multi threading}
+To enhance pipeline utilization and hide memory or control latency, the processor utilizes fine-grain multi threading where a new thread is issued into the pipeline per clock cycle. Thread scheduling is accomplished through a lightweight round-robin scheme which provides fairness and simplicity without complex scheduling logic.
+\begin{itemize}
+    \item The thread selection module is responsible the active thread in each clock cycle. It maintains a thread ID (TID) register that is incremented sequentially at every clock edge. Once TID reaches the maximum, it wraps around to 0, forming a circular, round-robin schedule, where all threads are given equal priority and are selected in a fixed cyclic order.
+\end{itemize}
+\begin{itemize}
+    \item The program counter module holds a separate program counter (PC) for every thread. On every cycle, the PC of the selected thread is loaded and incremented by 4. On jump or branch taken by any thread, the PC of the respective thread is updated accordingly with the target address. Since a branch is always resolved before the next instruction from a thread has to be dispatched, control hazards are eliminated.
+    This design ensures proper control flow for every thread as well as isolation of control state among threads.
+\end{itemize}
+\begin{itemize}
+    \item The register file features separate context for each hardware thread. For the FPGA platform the cost of using numerous registers is less due to the readily available registers part of the FPGA. Since registers cannot be used as freely for the sky130 platform, a combination of the RV32E extension and register windows have been used to minimize the cost of storing thread context. The RV32E extension features the same instructions as the base RV32I subset but requires only 16 registers instead of the usual 32 to reduce thread context storage overhead and hardware implementation costs. A windowed register file maintains the thread contexts for each hardware thread in a large memory block. Each cycle a subset corresponding to a hardware thread is loaded into a faster, smaller memory block from which the correct register values are read. This allows a significant improvement in speed while maintaining the required thread contexts.
+\end{itemize}
+
+\begin{itemize}
+    \item The proposed design has been synthesized for the skywater 130nm process node using Yosys, an open source synthesis suite. The high density standard cell library has been used here.  Yosys has been used to estimate the required area and produce a netlist of the design. The power and timing estimation have been done using OpenSTA which detects setup and hold time violations along with performing power estimation. Power is estimated through a gate level simulation which produces a VCD file which is used by OpenSTA to determine the overall power consumption. A python script has been used to automate generating these results.
+\end{itemize}
+
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.47\textwidth]{v3.png}  % Path to your image file
+    \caption{Functional Verification using GTKWave}  % Caption for the image
+    \label{fig:verif}  % Label for referencing the image
+\end{figure}
+
+\section*{Results}
+The FPGA and ASIC results have been summarized in the following table.
+
+\begin{table}[H]
+\centering
+\resizebox{\columnwidth}{!}{
+\begin{tabular}{|l|l|l|l|}
+\hline
+\multicolumn{4}{|l|}{FPGA}               \\ \hline
+Type            & LUTs & Power (W) & Max Frequency (MHz) \\
+Single threaded & 987  & 0.166 & 133.33        \\
+Multithreaded   & 1658 & 0.188 & 153.84        \\
+\hline
+\multicolumn{4}{|l|}{ASIC}               \\ \hline
+Type            & Area (\SI{}{\micro\metre\squared}) & Power (mW) & Max Frequency (MHz) \\
+Single Threaded & 153756.21 & 2.39 & 37.04\\
+Multithreaded & 208293.52 & 2.27 & 55.56\\ \hline
+\end{tabular}
+}
+\caption{Results Table}
+\end{table}
+
+The FPGA results indicate that the multi threaded implementation has a small increase in power and resource utilization but significantly improved speed. The design has been configured with 8 threads.
+\newline
+\newline
+For the ASIC implementation, the proposed processor was configured with 4 hardware threads and implements the RV32E instruction set instead of the RV32I instruction set. The proposed design managed to increase maximum frequency by almost 50\%. The power dissipated was also reduced by about 5\%. The main cost came in terms of area which saw a 33\% increase largely due to the additional storage cells required to maintain thread context.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.47\textwidth]{mt_power.png}  % Path to your image file
+    \caption{Power Report of Multithreaded Processor}  % Caption for the image
+    \label{fig:mt_power}  % Label for referencing the image
+\end{figure}
+
+The power reports have been generated using standard parameters and assuming a temperature of \SI{25}{\celsius}. A majority of the power dissipation is dynamic which is to be expected at such a high clock frequency.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.47\textwidth]{mttiming.png}  % Path to your image file
+    \caption{Timing Report of Multithreaded Processor}  % Caption for the image
+    \label{fig:mttiming}  % Label for referencing the image
+\end{figure}
+
+The timing reports check for setup and hold time slack and report failing endpoints if any. The maximum frequency at which the design can still pass timing is 153.84 MHz.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.47\textwidth]{mt_area.png}  % Path to your image file
+    \caption{Resource Allocation of Multithreaded Processor}  % Caption for the image
+    \label{fig:mt_area}  % Label for referencing the image
+\end{figure}
+
+The resource allocation table gives a brief overview of where LUTs and Registers are being used in the design. The exact break up of where LUTs and registers is also given.
+
+\section*{Conclusions and Future Work}
+From the results obtained it can be seen that a multi threaded processor is able to eliminate unnecessary hazard checking logic which results in an increase in speed compared to a single threaded implementation. In the case of the ASIC implementation the proposed design dissipated less power. The area required however does increase. On an FPGA, resisters are plentiful but for ASIC implementations they result in a significant increase in the required area. The proposed design is able to achieve better timing and lesser power while still providing the required throughput and parallelism required by Server applications. Such a design would benefit from required less expensive cooling solutions, offer a greener alternative to traditional server processor, and leverages the many benefits of the RISC-V ISA. Fine grain multi threading is able to create throughput focused designs with reduced delay and power consumption which suits the application of Servers in particular.
+
+Future work could focus on improving the area by using SRAM cells to store the thread contexts and load a subset corresponding to a thread into a faster, traditional register file. Other schemes may also be used to manage a large thread context required by such a processor. Other work could also include providing support for other instruction sets, changing the number of stages and reconfiguring the thread count to suit different applications.
+
+\bibliographystyle{plain}
+\bibliography{cite}
+\nocite*{}
+\vspace{12pt}
+
+\end{document}

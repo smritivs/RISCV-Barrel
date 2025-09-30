@@ -1,7 +1,7 @@
 Vcpu_tb__ALL.o: Vcpu_tb__ALL.cpp Vcpu_tb.cpp Vcpu_tb__pch.h \
  /home/bala/verilator/verilator/include/verilated.h \
- /home/bala/verilator/verilator/include/verilatedos.h \
  /home/bala/verilator/verilator/include/verilated_config.h \
+ /home/bala/verilator/verilator/include/verilatedos.h \
  /home/bala/verilator/verilator/include/verilated_types.h \
  /home/bala/verilator/verilator/include/verilated_funcs.h Vcpu_tb__Syms.h \
  /home/bala/verilator/verilator/include/verilated_vcd_c.h \
